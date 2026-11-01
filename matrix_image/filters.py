@@ -1,4 +1,4 @@
- import numpy as np
+import numpy as np
 from numpy.lib.stride_tricks import sliding_window_view
 
 

@@ -61,7 +61,7 @@ def _sample(img, sx, sy, fill, interpolation):
 
 def affine_transform(img, M, out_shape=None, about_center=True, fill=0.0,
                      interpolation="bilinear"):
-       gray = img.ndim == 2
+    gray = img.ndim == 2
     src = img[..., None] if gray else img
     h, w, c = src.shape
     oh, ow = out_shape if out_shape else (h, w)
