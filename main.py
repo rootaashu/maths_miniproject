@@ -2,7 +2,7 @@ import argparse
 
 from matrix_image import color, filters, svd_compress, transforms
 from matrix_image.demo import run_demo
-from matrix_image.io_utils import load_image, make_sample_image, save_image
+from matrix_image.oi_utils import load_image, make_sample_image, save_image
 
 
 def _load(path, max_size):
@@ -22,14 +22,7 @@ def cmd_transform(a):
         steps.append(transforms.rotation(a.rotate))
     M = transforms.compose(*steps) if steps else transforms.compose()
     print("Combined 3x3 matrix:\n", M.round(4))
-    h, w = img.shape[:2]
-    if a.rotate:  # expand canvas so nothing is cut off
-        import numpy as np
-        t = np.deg2rad(a.rotate)
-        c, s = abs(np.cos(t)) * a.scale, abs(np.sin(t)) * a.scale
-        shape = (int(np.ceil(w * s + h * c)), int(np.ceil(w * c + h * s)))
-    else:
-        shape = (round(h * a.scale), round(w * a.scale))
+    shape = transforms.fit_shape(M, *img.shape[:2])
     out = transforms.affine_transform(img, M, out_shape=shape)
     print("Saved", save_image(out, a.output))
 
