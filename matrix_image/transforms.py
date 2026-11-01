@@ -76,8 +76,16 @@ def affine_transform(img, M, out_shape=None, about_center=True, fill=0.0,
     Minv = inverse(M)
     xs, ys = np.meshgrid(np.arange(ow), np.arange(oh))
     pts = np.stack([xs.ravel(), ys.ravel(), np.ones(xs.size)])  # 3 x N
-    mapped = Minv @ pts  # one big product: NumPy for speed
-    sx, sy = mapped[0] / mapped[2], mapped[1] / mapped[2]
+    mapped = Minv @ pts  
+    #sx, sy = mapped[0] / mapped[2], mapped[1] / mapped[2]
+    denom = mapped[2]
+    valid = np.abs(denom) > 1e-12
+
+    sx = np.full(denom.shape, -1.0)
+    sy = np.full(denom.shape, -1.0)
+
+    sx[valid] = mapped[0, valid] / denom[valid]
+    sy[valid] = mapped[1, valid] / denom[valid]
 
     out = _sample(src, sx, sy, fill, interpolation).reshape(oh, ow, c)
     return out[..., 0] if gray else out
