@@ -113,7 +113,7 @@ def translate(img, tx, ty, **kw):
     return affine_transform(img, translation(tx, ty), about_center=False, **kw)
 
 
-def fit_shape(M, h< w):
+def fit_shape(M, h , w):
     corners = np.array([[0, w-1, w - 1, 0],
                         [0, 0, h - 1, h -1],
                         [1, 1, 1, 1]], dtype=float)
