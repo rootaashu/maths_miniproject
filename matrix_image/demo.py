@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from . import color, filters, svd_compress, transforms
-from .io_utils import make_sample_image, save_image
+from .oi_utils import make_sample_image, save_image
 
 
 def _gallery(items, title, path, ncols=4):
@@ -65,7 +65,7 @@ def run_demo(img=None, out_dir="outputs"):
         out / "filters.png",
     )
 
-     _gallery(
+    _gallery(
         [
             ("original", img),
             ("grayscale", color.apply_mode(img, "grayscale")),

@@ -1,6 +1,6 @@
 import numpy as np
 
-from .matrix_ops import inverse, matmul
+from .matrix_ops import inverse, mutmul
 
 
 def translation(tx, ty):
@@ -34,7 +34,7 @@ def reflection(axis):
 def compose(*matrices):
     result = np.eye(3)
     for M in matrices:
-        result = matmul(M, result)
+        result = mutmul(M, result)
     return result
 
 def _fetch(img, xi, yi, fill):

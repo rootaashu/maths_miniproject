@@ -16,10 +16,10 @@ def transpose(A):
             T[j, i] = A[i,j]
             return T 
 
-def mutmu1(A, B):
+def mutmul(A, B):
     A = np.asarray(A, dtype=float)
     B = np.asarray(B, dtype=float)
-    m,n = A.shape 
+    m, n = A.shape 
     n2, p = B.shape 
     if n != n2:
         raise ValueError(f"Shape mismatch: {A.shape} x {B.shape}")
