@@ -34,7 +34,7 @@ def mutmu1(A, B):
 
 
 def determinant(A):
-       M = np.array(A, dtype=float)
+    M = np.array(A, dtype=float)
     n, m = M.shape
     if n != m:
         raise ValueError("Determinant needs a square matrix")
