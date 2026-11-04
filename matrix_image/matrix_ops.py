@@ -1,11 +1,7 @@
 import numpy as np 
 
 def identity(n):
-
-    I = np.zeros((n,n))
-    for i in range(n):
-        I[i,i] = 1.0 
-        return I 
+    return np.eye(n, dtype=float)
 
 def transpose(A):
     A = np.asarray(A, dtype=float)
